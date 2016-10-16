@@ -14,6 +14,12 @@ Upload to PyPi
 $ python setup.py register bdist_wheel upload 
 ```
 
+Update package info
+-------------------
+```
+$ python setup.py register
+```
+
 Run tests
 ---------
 ```
