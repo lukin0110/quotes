@@ -14,17 +14,17 @@ ssl._create_default_https_context = ssl._create_unverified_context
 long_description = open(
     os.path.join(
         os.path.dirname(__file__),
-        'README.md'
+        'README.rst'
     )
 ).read()
 
 setup(
-    name='pyquotes',
+    name='quotes',
     author='Maarten Huijsmans',
     author_email='maarten@lukin.be',
     url='http://github.com/lukin0110/quotes',
     license='Apache Software License',
-    version='0.0.1',
+    version='0.0.2',
     description='Small python lib that contains a few quotes of famous people',
     long_description=long_description,
     packages=find_packages(),
@@ -44,7 +44,7 @@ setup(
         'Topic :: Software Development',
     ],
     package_data={
-        'pyquotes': ['assets/*'],
+        'quotes': ['assets/*'],
     },
     test_suite='tests',
 )

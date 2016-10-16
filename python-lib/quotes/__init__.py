@@ -7,13 +7,22 @@ SETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets/sets.csv
 _quotes = None
 
 
-def random(sets_file=SETS):
+def _get_quotes(sets_file=SETS):
     global _quotes
     if _quotes is None:
         _quotes = load_sets(sets_file)
+    return _quotes
 
-    key = randy.choice(list(_quotes.keys()))
+
+def random(sets_file=SETS):
+    quotes = _get_quotes(sets_file)
+    key = randy.choice(list(quotes.keys()))
     return key, randy.choice(_quotes[key])[0]
+
+
+def persons(sets_file=SETS):
+    quotes = _get_quotes(sets_file)
+    return list(quotes.keys())
 
 
 def load_sets(sets_file=SETS):

@@ -93,3 +93,4 @@ TODO.md
 python-lib/tmp.py
 python-lib/build
 python-lib/dist
+python-lib/.pypirc

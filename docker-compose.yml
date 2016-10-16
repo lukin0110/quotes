@@ -2,4 +2,4 @@ app:
     build: .
     volumes:
       - ./python-lib:/usr/src/app
-      - ./quotes:/usr/src/app/pyquotes/assets
+      - ./quotes:/usr/src/app/quotes/assets
