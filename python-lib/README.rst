@@ -8,11 +8,13 @@ Installation
 
 ::
 
-    pip install prompt_toolkit
+    pip install quotes
     
     
 Usage
 *****
+
+Get a random quote:
 
 .. code:: python
 
@@ -20,3 +22,13 @@ Usage
 
     if __name__ == '__main__':
         print(random())
+
+
+List of available persons:
+
+.. code:: python
+
+    from quotes import persons
+
+    if __name__ == '__main__':
+        print(persons())
