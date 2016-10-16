@@ -1,0 +1,15 @@
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+.docker
+
+# Python
+*.pyc
+__pycache__
+
+python-lib/build
+python-lib/dist
+python-lib/pyquotes.egg-info

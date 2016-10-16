@@ -4,12 +4,9 @@ import random
 
 def read_file(filename):
     result = []
-    with open(filename, 'rb') as csvfile:
+    # iterator should return strings, not bytes (did you open the file in text mode?)
+    with open(filename, 'rt') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         for row in reader:
             result.append(row)
     return result
-
-
-def random_quote(filename):
-    return random.choice(read_file(filename))

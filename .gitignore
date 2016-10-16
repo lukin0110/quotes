@@ -90,3 +90,6 @@ ENV/
 
 .idea
 TODO.md
+python-lib/tmp.py
+python-lib/build
+python-lib/dist
