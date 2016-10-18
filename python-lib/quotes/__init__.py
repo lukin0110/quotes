@@ -17,7 +17,7 @@ def _get_quotes(sets_file=SETS):
 def random(sets_file=SETS):
     quotes = _get_quotes(sets_file)
     key = randy.choice(list(quotes.keys()))
-    return key, randy.choice(_quotes[key])[0]
+    return key, randy.choice(_quotes[key]['lines'])[0]
 
 
 def persons(sets_file=SETS):
@@ -25,12 +25,21 @@ def persons(sets_file=SETS):
     return list(quotes.keys())
 
 
+def sets(sets_file=SETS):
+    quotes = _get_quotes(sets_file)
+    return {k: v['set'] for k, v in quotes.items()}
+
+
 def load_sets(sets_file=SETS):
     sets = read_file(sets_file)
     results = {}
 
-    for item in sets:
+    # Skip the first line of each file, it's the header
+    for item in sets[1:]:
         file_path = os.path.join(os.path.dirname(os.path.abspath(sets_file)), item[1])
-        results[item[0]] = read_file(file_path)
+        results[item[0]] = {
+            'lines': read_file(file_path)[1:],
+            'set': item[1]
+        }
 
     return results

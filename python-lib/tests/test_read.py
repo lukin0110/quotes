@@ -18,7 +18,11 @@ class TestRead(unittest.TestCase):
         persons = quotes.persons()
         self.assertTrue(type(persons) == list)
         print(persons)
-        self.assertTrue(True)
+
+    def test_sets(self):
+        sets = quotes.sets()
+        self.assertTrue(type(sets) == dict)
+        print(sets)
 
     def test_write(self):
         # print("Write quotes")
