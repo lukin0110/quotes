@@ -2,40 +2,13 @@ import random as randy
 import os
 from .read import read_file
 
-# Relative path to this __init__ file
-SETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets/index.csv")
-_quotes = None
 
-
-def _get_quotes(sets_file=SETS):
-    global _quotes
-    if _quotes is None:
-        _quotes = load_sets(sets_file)
-    return _quotes
-
-
-def random(sets_file=SETS):
-    quotes = _get_quotes(sets_file)
-    key = randy.choice(list(quotes.keys()))
-    return key, randy.choice(_quotes[key]['lines'])[0]
-
-
-def persons(sets_file=SETS):
-    quotes = _get_quotes(sets_file)
-    return list(quotes.keys())
-
-
-def sets(sets_file=SETS):
-    quotes = _get_quotes(sets_file)
-    return {k: v['set'] for k, v in quotes.items()}
-
-
-def load_sets(sets_file=SETS):
-    sets = read_file(sets_file)
+def load_sets(sets_file):
+    set_list = read_file(sets_file)
     results = {}
 
     # Skip the first line of each file, it's the header
-    for item in sets[1:]:
+    for item in set_list[1:]:
         file_path = os.path.join(os.path.dirname(os.path.abspath(sets_file)), item[1])
         results[item[0]] = {
             'lines': read_file(file_path)[1:],
@@ -43,3 +16,22 @@ def load_sets(sets_file=SETS):
         }
 
     return results
+
+
+class Quotes(object):
+    # Relative path to this __init__ file
+    SETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets/index.csv")
+
+    def __init__(self, sets_file=SETS):
+        self.sets_file = sets_file
+        self.quotes = load_sets(self.sets_file)
+
+    def random(self):
+        key = randy.choice(list(self.quotes.keys()))
+        return key, randy.choice(self.quotes[key]['lines'])[0]
+
+    def persons(self):
+        return list(self.quotes.keys())
+
+    def sets(self):
+        return {k: v['set'] for k, v in self.quotes.items()}

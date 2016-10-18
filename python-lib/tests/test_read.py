@@ -1,25 +1,29 @@
 import os
 import unittest
-import quotes
+from quotes import Quotes
 
 
 class TestRead(unittest.TestCase):
     def test_rigorous(self):
+        quotes = Quotes()
         print(quotes.random())
         self.assertTrue(True)
 
     def test_load_custom_sets(self):
         # setsfile = os.path.join(os.path.dirname(__file__), "assets/sets.csv")
         setsfile = "/usr/src/app/quotes/assets/index.csv"
-        quotes.random(sets_file=setsfile)
+        quotes = Quotes(setsfile)
+        quotes.random()
         self.assertTrue(True)
 
     def test_persons(self):
+        quotes = Quotes()
         persons = quotes.persons()
         self.assertTrue(type(persons) == list)
         print(persons)
 
     def test_sets(self):
+        quotes = Quotes()
         sets = quotes.sets()
         self.assertTrue(type(sets) == dict)
         print(sets)
@@ -28,4 +32,3 @@ class TestRead(unittest.TestCase):
         # print("Write quotes")
         # write("in.csv", "out.csv")
         pass
-
