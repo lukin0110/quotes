@@ -3,7 +3,7 @@ import os
 from .read import read_file
 
 # Relative path to this __init__ file
-SETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets/sets.csv")
+SETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets/index.csv")
 _quotes = None
 
 

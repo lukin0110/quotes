@@ -10,7 +10,7 @@ class TestRead(unittest.TestCase):
 
     def test_load_custom_sets(self):
         # setsfile = os.path.join(os.path.dirname(__file__), "assets/sets.csv")
-        setsfile = "/usr/src/app/quotes/assets/sets.csv"
+        setsfile = "/usr/src/app/quotes/assets/index.csv"
         quotes.random(sets_file=setsfile)
         self.assertTrue(True)
 
