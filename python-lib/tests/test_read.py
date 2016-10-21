@@ -25,7 +25,7 @@ class TestRead(unittest.TestCase):
     def test_sets(self):
         quotes = Quotes()
         sets = quotes.sets()
-        self.assertTrue(type(sets) == dict)
+        self.assertTrue(type(sets) == list)
         print(sets)
 
     def test_write(self):
@@ -37,9 +37,6 @@ class TestRead(unittest.TestCase):
         quotes = Quotes()
         sets = quotes.sets()
 
-        for k, v in sets.items():
-            arr = quotes.get_set(v)
-            self.assertIsInstance(arr, list)
-
-            arr = quotes.get_set(v.replace('.csv', ''))
+        for k in sets:
+            arr = quotes.get_set(k)
             self.assertIsInstance(arr, list)

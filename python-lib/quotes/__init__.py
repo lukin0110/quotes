@@ -10,9 +10,9 @@ def load_sets(sets_file):
     # Skip the first line of each file, it's the header
     for item in set_list[1:]:
         file_path = os.path.join(os.path.dirname(os.path.abspath(sets_file)), item[1])
-        results[item[0]] = {
+        results[item[1].replace('.csv', '')] = {
             'lines': read_file(file_path)[1:],
-            'key': item[1]
+            'name': item[0]
         }
 
     return results
@@ -26,7 +26,7 @@ class Quotes(object):
         self.sets_file = sets_file
         self.quotes = load_sets(self.sets_file)
 
-    def random(self):
+    def random(self, keys=None):
         key = randy.choice(list(self.quotes.keys()))
         return key, randy.choice(self.quotes[key]['lines'])[0]
 
@@ -34,7 +34,8 @@ class Quotes(object):
         return list(self.quotes.keys())
 
     def sets(self):
-        return {k: v['key'] for k, v in self.quotes.items()}
+        # return {k: v['key'] for k, v in self.quotes.items()}
+        return [k for k, v in self.quotes.items()]
 
     def get_set(self, key):
         """
@@ -45,13 +46,8 @@ class Quotes(object):
         :return: a list of quotes
         """
         assert key
-        _quotes = {v['key'].replace('.csv', ''): v['lines'] for k, v in self.quotes.items()}
 
-        if key in _quotes:
-            return _quotes[key]
-
-        _key = key.replace('.csv', '')
-        if _key in _quotes:
-            return _quotes[_key]
+        if key in self.quotes:
+            return self.quotes[key]['lines']
 
         raise KeyError(key)
