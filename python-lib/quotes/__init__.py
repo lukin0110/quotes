@@ -27,8 +27,19 @@ class Quotes(object):
         self.quotes = load_sets(self.sets_file)
 
     def random(self, keys=None):
-        key = randy.choice(list(self.quotes.keys()))
-        return key, randy.choice(self.quotes[key]['lines'])[0]
+        # Take only a few sets into account
+        if isinstance(keys, list):
+            _quotes = {key: self.quotes[key] for key in keys if key in self.quotes}
+
+        # Take all sets into account
+        else:
+            _quotes = self.quotes
+
+        if len(_quotes) > 0:
+            key = randy.choice(list(_quotes.keys()))
+            return key, randy.choice(_quotes[key]['lines'])[0]
+        else:
+            return None
 
     def persons(self):
         return list(self.quotes.keys())

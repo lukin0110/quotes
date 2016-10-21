@@ -40,3 +40,16 @@ class TestRead(unittest.TestCase):
         for k in sets:
             arr = quotes.get_set(k)
             self.assertIsInstance(arr, list)
+
+    def test_random(self):
+        quotes = Quotes()
+        keys = ['albert_einstein', 'henry_ford']
+        q = quotes.random(keys=keys)
+        self.assertTrue(q[0] in keys)
+
+        keys = ['emily_carr', 'does not exist']
+        q = quotes.random(keys=keys)
+        self.assertEqual(q[0], 'emily_carr')
+
+        q = quotes.random(keys=[])
+        self.assertTrue(q is None)
