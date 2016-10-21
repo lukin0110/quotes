@@ -32,3 +32,14 @@ class TestRead(unittest.TestCase):
         # print("Write quotes")
         # write("in.csv", "out.csv")
         pass
+
+    def test_get_set1(self):
+        quotes = Quotes()
+        sets = quotes.sets()
+
+        for k, v in sets.items():
+            arr = quotes.get_set(v)
+            self.assertIsInstance(arr, list)
+
+            arr = quotes.get_set(v.replace('.csv', ''))
+            self.assertIsInstance(arr, list)
