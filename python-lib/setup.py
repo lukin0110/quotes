@@ -24,7 +24,7 @@ setup(
     author_email='maarten@lukin.be',
     url='http://github.com/lukin0110/quotes',
     license='Apache Software License',
-    version='0.0.2.b1',
+    version='0.0.3',
     description='Small python lib that contains a few quotes of famous people',
     long_description=long_description,
     packages=find_packages(),
