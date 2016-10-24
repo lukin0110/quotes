@@ -26,7 +26,24 @@ class Quotes(object):
         self.sets_file = sets_file
         self.quotes = load_sets(self.sets_file)
 
-    def random(self, keys=None):
+    def random(self, keys=None, pick=None):
+        """
+        By default, if `keys` nor `pick` is specified, it will randomize over all available
+        quotes.
+
+        * If `pick` is specified it will only randomze over the `picked` quotes
+        * If `keys` is specified it will randomize over all quotes in those sets
+
+        :param keys:
+        :param pick:
+        :return:
+        """
+        if isinstance(pick, list):
+            results = []
+            for item in pick:
+                results.append(self.pick(item[0], item[1]))
+            return randy.choice(results)
+
         # Take only a few sets into account
         if isinstance(keys, list):
             _quotes = {key: self.quotes[key] for key in keys if key in self.quotes}
@@ -37,9 +54,20 @@ class Quotes(object):
 
         if len(_quotes) > 0:
             key = randy.choice(list(_quotes.keys()))
-            return key, randy.choice(_quotes[key]['lines'])[0]
+            return _quotes[key]['name'], randy.choice(_quotes[key]['lines'])[0]
         else:
             return None
+
+    def pick(self, key, index=0):
+        assert key
+
+        if key in self.quotes:
+            quotes = self.quotes[key]
+            if -1 < index < len(quotes['lines']):
+                return quotes['name'], quotes['lines'][index][0]
+            raise IndexError(index)
+
+        raise KeyError(key)
 
     def persons(self):
         return list(self.quotes.keys())

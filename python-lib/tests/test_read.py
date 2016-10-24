@@ -41,15 +41,34 @@ class TestRead(unittest.TestCase):
             arr = quotes.get_set(k)
             self.assertIsInstance(arr, list)
 
+    def test_pick(self):
+        quotes = Quotes()
+        quote = quotes.pick('albert_einstein', 0)
+        self.assertEqual(quote[0], 'Albert Einstein')
+        self.assertEqual(quote[1], "You can't blame gravity for falling in love.")
+
+        with self.assertRaises(KeyError):
+            quotes.pick('harry_foobar')
+
+        with self.assertRaises(IndexError):
+            quotes.pick('albert_einstein', -1)
+
+    def test_random_pick(self):
+        quotes = Quotes()
+        picked = [('albert_einstein', 0), ('henry_ford', 1)]
+        quote = quotes.random(pick=picked)
+        expected = ['Albert Einstein', 'Henry Ford']
+        self.assertTrue(quote[0] in expected)
+
     def test_random(self):
         quotes = Quotes()
         keys = ['albert_einstein', 'henry_ford']
         q = quotes.random(keys=keys)
-        self.assertTrue(q[0] in keys)
+        self.assertTrue(q[0] in ['Albert Einstein', 'Henry Ford'])
 
         keys = ['emily_carr', 'does not exist']
         q = quotes.random(keys=keys)
-        self.assertEqual(q[0], 'emily_carr')
+        self.assertEqual(q[0], 'Emily Carr')
 
         q = quotes.random(keys=[])
         self.assertTrue(q is None)
